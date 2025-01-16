@@ -36,16 +36,16 @@ def test_FastaParser():
     # blank file
     with pytest.raises(ValueError):
         # Test with an empty file
-        fa_blank = FastaParser("HW1-FAST-AQ-Parser/tests/blank.fa")
+        fa_blank = FastaParser("tests/blank.fa")
         next(iter(fa_blank))  # this should fail
     
     # bad file
     with pytest.raises(ValueError):
-        fa_bad = FastaParser("HW1-FAST-AQ-Parser/tests/bad.fa")
+        fa_bad = FastaParser("tests/bad.fa")
         next(iter(fa_bad))  # this should fail
     
     # test file as list
-    fa_test = list(FastaParser("HW1-FAST-AQ-Parser/tests/good.fa"))
+    fa_test = list(FastaParser("tests/good.fa"))
     fa_good = [("seq0", "TGATT"), ("seq1", "TCCGC")]
     assert len(fa_test) > 0, "Test FASTA should read in 1 or more lines"
     assert all(len(fa_item) == 2 for fa_item in fa_test), "Each item should be a tuple of 2 items"
@@ -58,7 +58,7 @@ def test_FastaFormat():
     read, the first item is None
     """
     # test FASTQ file for None
-    fq_test = FastaParser("HW1-FAST-AQ-Parser/data/test.fq")
+    fq_test = FastaParser("data/test.fq")
     assert next(iter(fq_test))[0] is None, "Reading a FASTQ should produce a None"
 
 
@@ -71,15 +71,15 @@ def test_FastqParser():
     # blank file
     with pytest.raises(ValueError):
         # Test with an empty file
-        fq_blank = FastqParser("HW1-FAST-AQ-Parser/tests/blank.fq")
+        fq_blank = FastqParser("tests/blank.fq")
         next(iter(fq_blank))  # this should fail
     
     # bad file
-    fq_bad = FastqParser("HW1-FAST-AQ-Parser/tests/bad.fq")
+    fq_bad = FastqParser("tests/bad.fq")
     assert next(iter(fq_bad))[0] is None, "FastqParser does not return a None for a bad fastq"
     
     # test file as list
-    fq_test = list(FastqParser("HW1-FAST-AQ-Parser/tests/good.fq"))
+    fq_test = list(FastqParser("tests/good.fq"))
     fq_good = [("seq0", "TGTGG", "*540("), ("seq1", "CCCCG", "3(<#/")]
     assert len(fq_test) > 0, "Test FASTA should read in 1 or more lines"
     assert all(len(fq_item) == 3 for fq_item in fq_test), "Each item should be a tuple of 3 items"
@@ -91,5 +91,5 @@ def test_FastqFormat():
     first line is None
     """
     # test FASTA file for None
-    fa_test = FastqParser("HW1-FAST-AQ-Parser/data/test.fa")
+    fa_test = FastqParser("data/test.fa")
     assert next(iter(fa_test))[0] is None, "Reading a FASTA should produce a None"
