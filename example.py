@@ -44,6 +44,8 @@ def main():
     print("Reverse transcribe the FASTQ")
     iterate_n_print(fq_obj, reverse=True)
 
+    # comment to test if actions work
+
 
 """
 When executing a python script from the command line there will
